@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<title>{% block title %}Track - Team Based Issue Tracker{% endblock %}</title>
+	<script src="/static/js/jquery/jquery-3.3.1.min.js"></script>
+	<script src="/static/js/scripts.js"></script>
+	{% load compile_static %}
+	{% load static %}
+	<link rel="stylesheet" href="{% static 'css/style.less'|compile%}" />
+</head>
+<body>
+	{% block body %}
+	{% endblock %}
+</body>
+</html>
