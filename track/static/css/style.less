@@ -1,3 +1,11 @@
+@import "/static/css/html5reset.css";
+
+@base_bg: #ddd;
 @base_color: #4265b7;
 
-body { background-color: @base_color; }
+@toast_general: #888888;
+
+body { background-color: @base_bg; }
+
+div.base-toast { width: 100vw; height: 42px; line-height: 42px; text-align: center; position: fixed; left: 0; top: 0; }
+div.base-toast.toast-type-general { background-color: @toast_general; color: black; }

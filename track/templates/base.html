@@ -6,9 +6,12 @@
 	<script src="/static/js/scripts.js"></script>
 	{% load compile_static %}
 	{% load static %}
-	<link rel="stylesheet" href="{% static 'css/style.less'|compile%}" />
+	<link rel="stylesheet" href="{% static 'css/style.less'|compile %}" />
 </head>
 <body>
+	{% if toast %}
+	<div class="base-toast toast-type-{{ toast.type }}">{{ toast.message }}</div>
+	{% endif %}
 	{% block body %}
 	{% endblock %}
 </body>
