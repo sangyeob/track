@@ -1,0 +1,4 @@
+venv-track/*
+*.py[co]
+*.sqlite3
+/track/track/settings_secret.py
