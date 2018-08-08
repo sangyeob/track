@@ -25,3 +25,4 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('feed/', include('feed.urls')),
 ]
+

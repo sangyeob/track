@@ -2,3 +2,4 @@ Django==2.1
 django-static-precompiler==1.8.2
 mysqlclient==1.3.13
 pytz==2018.5
+whitenoise==3.3.1
