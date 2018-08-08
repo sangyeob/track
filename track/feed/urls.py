@@ -4,8 +4,10 @@ from . import views
 
 app_name = 'feed'
 urlpatterns = [
-	path('', views.dashboardView, name='dashboardView'),
+	path('', views.myPageView, name='myPageView'),
 	path('channel/<str:channel_name>', views.channelView, name='channelView'),
+	path('user/<str:user_name>', views.userView, name="userView"),
+	path('issue', views.newIssueView, name='newIssueView'),
+	path('issue/<int:issue_id>', views.issueView, name="issueView"),
 	path('issue/<int:issue_id>/comment', views.issueCommentView, name="issueCommentView"),
-	path('issue/<int:issue_id>/task', views.issueTaskView, name="issueTaskView"),
 ]

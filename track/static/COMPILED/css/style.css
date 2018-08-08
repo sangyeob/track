@@ -45,11 +45,35 @@ div.base-toast.toast-type-general {
   background-color: #888888;
   color: black;
 }
+div.base-toast.toast-type-error {
+  background-color: #ff6666;
+  color: white;
+}
 .container {
   width: 1200px;
   left: 50%;
   position: relative;
   margin-left: -600px;
+}
+body.login-body {
+  background-color: #4265b7;
+  text-align: center;
+}
+body.login-body img {
+  height: 20vh;
+  margin-top: 30vh;
+  margin-bottom: 30px;
+}
+body.login-body input {
+  width: 500px;
+  height: 40px;
+  line-height: 40px;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border: none;
+  padding: 0 20px;
+  border-radius: 5px;
 }
 header.feed-header {
   width: 100vw;
@@ -197,7 +221,98 @@ section.feed-content section.main-area {
   background-color: #fbfbfd;
   overflow: scroll;
   box-sizing: border-box;
-  padding: 20px 40px;
+  padding: 0 40px 20px;
+}
+section.feed-content section.main-area div.description {
+  width: calc(1200px - 460px);
+  margin: 0 50px 20px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  background-color: #d5ddf0;
+  line-height: 20px;
+  font-size: 14px;
+  border-radius: 0 0 10px 10px;
+}
+section.feed-content section.main-area form.new-issue div.form_border {
+  width: calc(1200px - 464px);
+  margin: 40px 50px 0;
+  border: 2px solid #4265b7;
+  border-radius: 15px;
+  overflow: hidden;
+}
+section.feed-content section.main-area form.new-issue div.form_border input[name=title] {
+  width: calc(1200px - 569px);
+  margin: 0;
+  padding: 0 20px;
+  box-sizing: border-box;
+  font-size: 16px;
+  line-height: 30px;
+  border: none;
+}
+section.feed-content section.main-area form.new-issue div.form_border textarea {
+  width: calc(1200px - 464px);
+  border: none;
+  border-top: 1px solid #4265b7;
+  font-size: 14px;
+  line-height: 20px;
+  resize: none;
+  height: 150px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  margin: 0;
+  outline: none;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.tabs {
+  width: 105px;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab {
+  float: left;
+  width: 20px;
+  height: 30px;
+  font-size: 15px;
+  line-height: 30px;
+  text-align: center;
+  cursor: pointer;
+  border-left: 1px dotted #4265b7;
+  transition: box-shadow 0.2s;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.selected {
+  box-shadow: 0 10px 9px -11px inset black;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab:hover {
+  box-shadow: 0 8px 9px -11px inset black;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.selected:hover {
+  box-shadow: 0 10px 9px -11px inset black;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.priority-0 {
+  color: #777;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.priority-1 {
+  color: green;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.priority-2 {
+  color: blue;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.priority-3 {
+  color: orange;
+}
+section.feed-content section.main-area form.new-issue div.form_border div.priority_tab.priority-4 {
+  color: red;
+}
+section.feed-content section.main-area form.new-issue div.btnSubmit {
+  width: 100px;
+  height: 40px;
+  background-color: #4265b7;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  right: -650px;
+  line-height: 40px;
+  border-radius: 0 0 10px 10px;
+  cursor: pointer;
 }
 section.feed-content article.issue {
   width: calc(1200px - 460px);
@@ -237,6 +352,16 @@ section.feed-content article.issue ul.tabs li.tab div.profile_pic img {
 section.feed-content article.issue ul.tabs li.tab div.team_name {
   margin-right: 5px;
 }
+section.feed-content article.issue ul.tabs li.tab.author_tab {
+  padding-right: 20px;
+}
+section.feed-content article.issue ul.tabs li.tab.datetime_tab {
+  background-color: #fbfbfd;
+  cursor: default;
+}
+section.feed-content article.issue ul.tabs li.tab.datetime_tab:hover {
+  background-color: #fbfbfd;
+}
 section.feed-content article.issue ul.tabs li.tab.priority_tab {
   cursor: default;
   background-color: #fbfbfd;
@@ -244,19 +369,19 @@ section.feed-content article.issue ul.tabs li.tab.priority_tab {
 section.feed-content article.issue ul.tabs li.tab.priority_tab:hover {
   background-color: #fbfbfd;
 }
-section.feed-content article.issue ul.tabs li.tab.priority-1 {
+section.feed-content article.issue ul.tabs li.tab.priority-0 {
   color: #777;
 }
-section.feed-content article.issue ul.tabs li.tab.priority-2 {
+section.feed-content article.issue ul.tabs li.tab.priority-1 {
   color: green;
 }
-section.feed-content article.issue ul.tabs li.tab.priority-3 {
+section.feed-content article.issue ul.tabs li.tab.priority-2 {
   color: blue;
 }
-section.feed-content article.issue ul.tabs li.tab.priority-4 {
+section.feed-content article.issue ul.tabs li.tab.priority-3 {
   color: orange;
 }
-section.feed-content article.issue ul.tabs li.tab.priority-5 {
+section.feed-content article.issue ul.tabs li.tab.priority-4 {
   color: red;
 }
 section.feed-content article.issue div.content {
@@ -264,6 +389,7 @@ section.feed-content article.issue div.content {
   border: 2px solid #4265b7;
   margin-bottom: 0;
   box-shadow: 0 5px 14px -10px #4265b7;
+  position: relative;
 }
 section.feed-content article.issue div.content h2 {
   background-color: #4265b7;
@@ -277,48 +403,21 @@ section.feed-content article.issue div.content p.content {
   line-height: 20px;
   padding: 10px 20px;
 }
-section.feed-content article.issue div.content div.task_label {
-  margin-top: 10px;
-  margin-left: 20px;
-  line-height: 20px;
-  font-size: 12px;
-}
-section.feed-content article.issue div.content ul.tasks li.task {
-  margin-top: 5px;
-  margin-top: 10px;
-}
-section.feed-content article.issue div.content ul.tasks li.task a {
-  display: block;
-}
-section.feed-content article.issue div.content ul.tasks li.task div.assigned_to {
-  border-radius: 0 5px 5px 0;
-  overflow: hidden;
-  font-size: 12px;
-  line-height: 30px;
-  background-color: #d5ddf0;
-  padding: 5px 15px;
-  transition: background-color 0.2s;
-}
-section.feed-content article.issue div.content ul.tasks li.task div.assigned_to div.profile_pic {
+section.feed-content article.issue div.content div.deleteBtn {
   width: 20px;
   height: 20px;
-  border-radius: 10px;
-  overflow: hidden;
-  margin: 5px;
+  position: absolute;
+  top: 12px;
+  right: 10px;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s;
 }
-section.feed-content article.issue div.content ul.tasks li.task div.assigned_to div.profile_pic img {
-  height: 20px;
-}
-section.feed-content article.issue div.content ul.tasks li.task div.assigned_to div.team_name {
-  margin-right: 5px;
-}
-section.feed-content article.issue div.content ul.tasks li.task div.assigned_to:hover {
-  background-color: #8aa0d5;
-}
-section.feed-content article.issue div.content ul.tasks li.task div.job {
-  font-size: 12px;
-  line-height: 30px;
-  padding: 5px 15px;
+section.feed-content article.issue div.content:hover div.deleteBtn {
+  opacity: 1;
 }
 section.feed-content article.issue ul.comments {
   margin: -1px 20px 0;
@@ -345,7 +444,7 @@ section.feed-content article.issue ul.comments li.comment div.author div.profile
   height: 15px;
   border-radius: 8px;
   overflow: hidden;
-  margin: 5px;
+  margin: 5px 5px 5px 0;
 }
 section.feed-content article.issue ul.comments li.comment div.author div.profile_pic img {
   height: 15px;

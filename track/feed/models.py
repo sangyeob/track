@@ -27,11 +27,6 @@ class Issue(models.Model):
 	priority = models.IntegerField(choices=PRIORITY_CHOICES)
 	channel = models.ForeignKey(Channel, on_delete=models.CASCADE)
 
-class Task(models.Model):
-	issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='tasks')
-	job = models.TextField(max_length=200)
-	assigned_to = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
-
 class Comment(models.Model):
 	issue = models.ForeignKey(Issue, on_delete=models.CASCADE, related_name='comments')
 	content = models.TextField(max_length=500)

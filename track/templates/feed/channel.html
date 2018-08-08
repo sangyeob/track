@@ -5,46 +5,71 @@
 	{% include 'feed/blocks/header.block.html' %}
 	<section class="feed-content container clearfix">
 		{% include 'feed/blocks/sidebar.block.html' %}
-		<section class="main-area floatL">
+		<section class="main-area floatL" data-myfeed-url="{% url 'feed:myPageView' %}">
+			{% if is_myPage and needPageDescription %}
+			<div class="description">
+				<div>{{ page_user.person.team.name }}팀 {{ page_user.person.name }}님의 페이지입니다.</div>
+			</div>
+			{% endif %}
+			{% if is_myPage and not needPageDescription and not issues %}
+			<div class="description">
+				<div>쓰신 글이 하나도 없네요! 채널에 들어가서 글을 써 보세요.</div>
+			</div>
+			{% endif %}
+			{% if not is_myPage %}
+			<div class="description">
+				<div><i class="fas fa-hashtag"></i> {{ channel_name }}</div>
+				<div>{{ channel_desc }}</div>
+			</div>
+			<form class="new-issue clearfix" action="{% url 'feed:newIssueView' %}" method="POST">
+				{% csrf_token %}
+				<input type="hidden" name="priority" value="0" />
+				<input type="hidden" name="channel_name" value="{{ channel_name }}" />
+				<div class="form_border">
+					<div class="clearfix">
+						<input type="text" name="title" placeholder="제목을 입력하세요" />
+						<div class="tabs floatR clearfix">
+							<div class="selected priority_tab priority-0" data-priority="0"><i class="fas fa-flag"></i></div>
+							<div class="priority_tab priority-1" data-priority="1"><i class="fas fa-flag"></i></div>
+							<div class="priority_tab priority-2" data-priority="2"><i class="fas fa-flag"></i></div>
+							<div class="priority_tab priority-3" data-priority="3"><i class="fas fa-flag"></i></div>
+							<div class="priority_tab priority-4" data-priority="4"><i class="fas fa-flag"></i></div>
+						</div>
+					</div>
+					<textarea name="content" placeholder="본문을 입력하세요"></textarea>
+				</div>
+				<div class="btnSubmit">게시</div>
+			</form>
+			{% endif %}
 			{% for issue in issues %}
 			<article class="issue">
 				<ul class="tabs clearfix">
-					<a href="{% url 'feed:channelView' channel_name=channel_name %}"><li class="tab channel_tab floatL"><i class="fas fa-hashtag"></i> {{ channel_name }}</li></a>
-					<a href="{% url 'feed:channelView' channel_name=channel_name %}">
-					<li class="tab author_tab clearfix floatL"><div class="profile_pic floatL"><img class="profile_pic" src="{% include 'feed/blocks/profile_pic.block.html' with person=issue.author.person %}" /></div><div class="team_name floatL">{{ issue.author.person.team.name }}</div><div class="name floatL">{{ issue.author.person.name }}님</div></li></a>
+					{% if is_myPage %}
+					<a href="{% url 'feed:channelView' channel_name=issue.channel.name %}"><li class="tab channel_tab floatL"><i class="fas fa-hashtag"></i> {{ issue.channel.name }}</li></a>
+					{% endif %}
+					<a href="{% url 'feed:userView' user_name=issue.author.username %}">
+					<li class="tab author_tab clearfix floatL"><div class="profile_pic floatL"><img class="profile_pic" src="{% include 'feed/blocks/profile_pic.block.html' with person=issue.author.person %}" /></div><div class="team_name floatL">{{ issue.author.person.team.name }}</div><div class="name floatL">{{ issue.author.person.name }}</div></li></a>
+					<li class="tab datetime_tab floatL">{{ issue.created_at }}</li>
 					<li class="tab priority_tab floatR priority-{{ issue.priority }}"><i class="fas fa-flag"></i></li>
 				</ul>
 				<div class="content">
 					<h2 class="title">{{ issue.title }}</h2>
 					<p class="content">{{ issue.content }}</p>
-					<div class="task_label">Tasks</div>
-					<ul class="tasks">
-						{% for task in issue.tasks.all %}
-							<li class="task clearfix">
-								<a href="#profilepage" class="floatL"><div class="assigned_to clearfix"><div class="profile_pic floatL"><img class="profile_pic" src="{% include 'feed/blocks/profile_pic.block.html' with person=task.assigned_to.person %}" /></div><div class="team_name floatL">{{ task.assigned_to.person.team.name }}</div><div class="name floatL">{{ task.assigned_to.person.name }}님</div></div></a>
-								<div class="job floatL">{{ task.job }}</div>
-							</li>
-						{% endfor %}
-					</ul>
-					<form class="add_task_form ajax_form" methods="POST" action="{% url 'feed:issueTaskView' issue_id=issue.id %}" data-csrf-token="{{ csrf_token }}">
-						<input type="text" name="person_search_field" /><input type="text" name="job" />
-						<input type="hidden" name="assigned_to" />
-					</form>
+					{% if issue.author == request.user %}
+					<div class="deleteBtn" data-action="{% url 'feed:issueView' issue_id=issue.id %}" data-csrf-token="{{ csrf_token }}"><i class="fas fa-trash"></i></div>
+					{% endif %}
 				</div>
 				<ul class="comments">
 					{% for comment in issue.comments.all %}
-						<li class="comment clearfix"><a href="#profilepage" class="floatL"><div class="author clearfix"><div class="profile_pic floatL"><img class="profile_pic" src="{% include 'feed/blocks/profile_pic.block.html' with person=comment.author.person %}" /></div><div class="team_name floatL">{{ comment.author.person.team.name }}</div><div class="name floatL">{{ comment.author.person.name }}님</div></div></a>
+						<li class="comment clearfix"><a href="{% url 'feed:userView' user_name=issue.author.username %}" class="floatL"><div class="author clearfix"><div class="profile_pic floatL"><img class="profile_pic" src="{% include 'feed/blocks/profile_pic.block.html' with person=comment.author.person %}" /></div><div class="team_name floatL">{{ comment.author.person.team.name }}</div><div class="name floatL">{{ comment.author.person.name }}</div></div></a>
 						<div class="comment floatL">{{ comment.content }}</div><div class="created_at">{{ comment.created_at }}</div></li>
 					{% endfor %}
-					<form class="add_comment_form ajax_form" methods="POST" action="{% url 'feed:issueCommentView' issue_id=issue.id %}" data-csrf-token="{{ csrf_token }}">
+					<form class="add_comment_form ajax_form" method="POST" action="{% url 'feed:issueCommentView' issue_id=issue.id %}" data-csrf-token="{{ csrf_token }}">
 						<input type="text" name="content" placeholder="댓글을 입력하세요" />
 						<input type="hidden" name="author" value="{{ request.user.id }}" />
 					</form>
 				</ul>
 			</article>
-			{% endfor %}
-			{% for m in members %}
-			{{ m.person.name }}
 			{% endfor %}
 		</section>
 	</section>

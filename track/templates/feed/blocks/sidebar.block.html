@@ -1,13 +1,12 @@
 <section class="feed-sidebar floatL">
 	<ul>
-		<div class="seperator">Dashboard</div>
-		<a href="{% url 'feed:dashboardView' %}"><li class="{% if channel_name == 'dashboard' %}selected{% endif %} clearfix"><i class="fas fa-chart-line floatL"></i><span class="name floatR">대시보드</span></li></a>
+		<div class="seperator">My Feed</div>
+		<a href="{% url 'feed:myPageView' %}"><li class="{% if channel_name == 'myPage' %}selected{% endif %} clearfix"><i class="fas fa-chart-line floatL"></i><span class="name floatR">내 피드</span></li></a>
 		<div class="seperator">Team</div>
 		<a href="{% url 'feed:channelView' channel_name=request.user.person.team.team_channel.name %}"><li class="{% if channel_name == request.user.person.team.team_channel.name %}selected{% endif %} clearfix"><i class="fas fa-hashtag"></i><span class="name floatR">{{ request.user.person.team.team_channel.name }}</span></li></a>
 		<div class="seperator">Channel</div>
 		{% for channel in channels %}
 		<a href="{% url 'feed:channelView' channel_name=channel.name %}"><li class="{% if channel_name == channel.name %}selected{% endif %} clearfix"><i class="fas fa-hashtag"></i><span class="name floatR">{{ channel.name }}</span></li></a>
 		{% endfor %}
-		<div class="ta-right"><a class="fetch-all-channel"><i class="fas fa-plus"></i>모두 보기</a></div>
 	</ul>
 </section>

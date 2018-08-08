@@ -12,7 +12,7 @@
 	{% block head %}
 	{% endblock %}
 </head>
-<body>
+<body {% block bodyattr %}{% endblock %}>
 	{% if toast %}
 	<div class="base-toast toast-type-{{ toast.type }}">{{ toast.message }}</div>
 	{% endif %}

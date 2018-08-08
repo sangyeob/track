@@ -35,10 +35,14 @@ input { outline: none; }
 div.base-toast { 
 	width: 100vw; height: 42px; line-height: 42px; text-align: center; position: fixed; left: 0; top: 0; 
 	&.toast-type-general { background-color: @toast_general; color: black; }
+	&.toast-type-error { background-color: lighten(red, 20%); color: white; }
 }
 
 .container { width: @container_size; left: 50%; position: relative; margin-left: -@container_size / 2; }
 
+body.login-body { background-color: @primary; text-align: center; }
+body.login-body img { height: 20vh; margin-top: 30vh; margin-bottom: 30px; }
+body.login-body input { width: 500px; height: 40px; line-height: 40px; outline: none; font-size: 16px; margin-bottom: 20px; border: none; padding: 0 20px; border-radius: 5px;}
 
 header.feed-header { 
 	width: 100vw; height: 50px; text-align: center; box-shadow: 0 -2px 10px @primary;
@@ -121,12 +125,60 @@ section.feed-content {
 		overflow: scroll; padding-bottom: 20px;
 	}
 	section.main-area {
+		div.description {
+			width: calc(@container_size - 460px);
+			margin: 0 50px 20px;
+			box-sizing: border-box;
+			padding: 10px 20px;
+			background-color: @primary_lighter; line-height: 20px; font-size: 14px;
+			border-radius: 0 0 10px 10px;
+		}
+		form.new-issue div.form_border {
+			width: calc(@container_size - 464px);
+			margin: 40px 50px 0;
+			border: 2px solid @primary;
+			border-radius: 15px;
+			overflow: hidden;
+			input[name=title] { 
+				width: calc(@container_size - 569px); 
+				margin: 0; 
+				padding: 0 20px; 
+				box-sizing: border-box; 
+				font-size: 16px; line-height: 30px; 
+				border: none;
+
+			}
+			textarea {
+				width: calc(@container_size - 464px);
+				border: none; border-top: 1px solid @primary;
+				font-size: 14px; line-height: 20px; resize: none;
+				height: 150px;
+				box-sizing: border-box; padding: 10px 20px; margin: 0; outline: none;
+			}
+			div.tabs { width: 105px; }
+			div.priority_tab { 
+				float: left; width: 20px; height: 30px; font-size: 15px; line-height: 30px; text-align: center; cursor: pointer; border-left: 1px dotted @primary;
+				transition: box-shadow .2s;
+				&.selected { box-shadow: 0 10px 9px -11px inset black; }
+				&:hover { box-shadow: 0 8px 9px -11px inset black; }
+				&.selected:hover { box-shadow: 0 10px 9px -11px inset black; }
+				&.priority-0 { color: #777; }
+				&.priority-1 { color: green; }
+				&.priority-2 { color: blue; }
+				&.priority-3 { color: orange; }
+				&.priority-4 { color: red; }
+			}
+		}
+		form.new-issue div.btnSubmit {
+			width: 100px; height: 40px; background-color: @primary; color: white; font-size: 16px; font-weight: bold;
+			text-align: center; position: relative; right: -650px; line-height: 40px; border-radius: 0 0 10px 10px; cursor: pointer;
+		}
 		height: calc(100vh - 50px);
 		width: calc(@container_size - 280px);
 		background-color: @base_bg;
 		overflow: scroll; 
 		box-sizing: border-box;
-		padding: 20px 40px;
+		padding: 0 40px 20px;
 	}
 	article.issue {
 		width: calc(@container_size - 460px);
@@ -148,6 +200,9 @@ section.feed-content {
 					margin: 5px;
 				}
 				div.team_name { margin-right: 5px; }
+				&.author_tab { padding-right: 20px; }
+				&.datetime_tab { background-color: @base_bg; cursor: default; }
+				&.datetime_tab:hover { background-color: @base_bg; }
 				font-size: 12px; line-height: 30px; margin-right: 5px;
 			}
 			li.tab.priority_tab { 
@@ -155,11 +210,11 @@ section.feed-content {
 				background-color: @base_bg;
 				&:hover { background-color: @base_bg; }
 			}
-			li.tab.priority-1 { color: #777; }
-			li.tab.priority-2 { color: green; }
-			li.tab.priority-3 { color: blue; }
-			li.tab.priority-4 { color: orange; }
-			li.tab.priority-5 { color: red; }
+			li.tab.priority-0 { color: #777; }
+			li.tab.priority-1 { color: green; }
+			li.tab.priority-2 { color: blue; }
+			li.tab.priority-3 { color: orange; }
+			li.tab.priority-4 { color: red; }
 		}
 		
 		div.content {
@@ -171,32 +226,16 @@ section.feed-content {
 				font-size: 14px; line-height: 20px;
 				padding: 10px 20px;
 			}
-			div.task_label { margin-top: 10px; margin-left: 20px; line-height: 20px; font-size: 12px; }
-			ul.tasks {
-				li.task {
-					margin-top: 5px; margin-top: 10px;
-					a { display: block; }
-					div.assigned_to { 
-						border-radius: 0 5px 5px 0; overflow: hidden;
-						div.profile_pic { 
-							width: 20px; height: 20px; border-radius: 10px; overflow: hidden; 
-							img { height: 20px; }
-							margin: 5px;
-						}
-						font-size: 12px; line-height: 30px;
-						div.team_name { margin-right: 5px; }
-						background-color: @primary_lighter;
-						padding: 5px 15px;
-						transition: background-color .2s;
-						&:hover { background-color: @primary_light; }
-					}
-					div.job { font-size: 12px; line-height: 30px; padding: 5px 15px; }
-				}
-				form.add_task_form {
-
-				}
-			}
 			box-shadow: 0 5px 14px -10px @primary;
+			position: relative;
+			div.deleteBtn {
+				width: 20px; height: 20px; position: absolute;
+				top: 12px; right: 10px; color: white; font-size: 15px; line-height: 20px;
+				cursor: pointer;
+				opacity: 0;
+				transition: opacity .2s;
+			}
+			&:hover div.deleteBtn { opacity: 1; }
 		}
 		ul.comments {
 			margin: -1px 20px 0;
@@ -210,7 +249,7 @@ section.feed-content {
 					div.profile_pic { 
 						width: 15px; height: 15px; border-radius: 8px; overflow: hidden; 
 						img { height: 15px; }
-						margin: 5px;
+						margin: 5px 5px 5px 0;
 					}
 					font-size: 12px; line-height: 25px;
 					div.team_name { margin-right: 5px; }

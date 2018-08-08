@@ -1,4 +1,7 @@
 $(document).ready(function() {
+	$('div.loginform input[type=password]').keypress(function(e) {
+		if(e.which == 10 || e.which == 13) $('div.loginform form').submit();
+	})
 	if($('div.base-toast').length > 0) {
 		setTimeout(function() {
 			$('div.base-toast').slideToggle(100);
@@ -31,9 +34,9 @@ $(document).ready(function() {
 		$form.addClass('preventEvent');
 		ajaxSubmit($form, function(result) {
 			$form.removeClass('preventEvent');
-			$form.find('input[name=content]').val('');
+			$form.find('input[name=content]').val('').blur();
 			$('<li class="comment clearfix">\
-								<a href="#profilepage" class="floatL">\
+								<a href="' + $('section.main-area').attr('data-myfeed-url') + '" class="floatL">\
 								<div class="author clearfix">\
 								<div class="profile_pic floatL">\
 								<img class="profile_pic" src="' + (result.pic.length > 0? result.pic : '/static/image/assets/profile_img_placeholder.png') + '" />\
@@ -41,17 +44,47 @@ $(document).ready(function() {
 								<div class="team_name floatL">\
 								' + result.team_name + ' </div>\
 								<div class="name floatL">\
-								' + result.author+ '님</div></div></a>\
+								' + result.author+ '</div></div></a>\
 						<div class="comment floatL">' + result.content + '</div><div class="created_at">방금</div></li>').insertBefore($form);
-			
 		}, function(result) {
 			$form.removeClass('preventEvent');
 		});
 		return false;
 	});
 
+	$('article.issue div.deleteBtn').click(function() {
+		$this = $(this);
+		$.ajax({
+			url: $this.attr('data-action'),
+			type: 'DELETE',
+			dataType: 'json',
+			cache: false,
+			headers: { "X-CSRFToken": $this.attr('data-csrf-token') },
+			data: { },
+			success: function(result) {
+				$this.parents('article.issue').remove();
+			},
+			error: function(result) {
+				console.log(result);
+			}
+		});
+	});
+
 	$('article.issue form.ajax_form a.btn_submit').click(function() {
 		$form = $(this).parents('form');
 		ajaxSubmit($form);
 	});
+
+	$('form.new-issue div.priority_tab').click(function() {
+		if($(this).hasClass('selected')) return false;
+		else {
+			$(this).parent().find('.selected').removeClass('selected');
+			$(this).addClass('selected');
+			$('form.new-issue').find('input[name=priority]').val($(this).attr('data-priority'));
+		}
+	});
+	$('form.new-issue div.btnSubmit').click(function() { 
+		$('form.new-issue').submit(); 
+	});
+
 });

@@ -1,10 +1,13 @@
 {% extends 'base.html' %}
+{% block bodyattr %} class="login-body" {% endblock %}
 {% block body %}
-<img src="http://placehold.it/100x48" alt="logo" />
+{% load static %}
+<div class="container loginform">
+<img src="{% static 'image/assets/logo_large.png' %}" alt="logo" />
 <form method="POST" action="{% url 'accounts:loginView' %}">
 		{% csrf_token %}
-		<input type="text" name="username" placeholder="Username" />
-		<input type="password" name="password" placeholder="Password" />
-		<input type="submit" value="submit" />
+		<div><input type="text" name="username" placeholder="Username" /></div>
+		<div><input type="password" name="password" placeholder="Password" /></div>
 </form>
+</div>
 {% endblock %}

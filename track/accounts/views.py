@@ -18,12 +18,12 @@ def loginView(request):
 				
 			if person.name == '' or person.team == None:
 				return HttpResponseRedirect(reverse('accounts:updatePersonProfileView'))
-			return HttpResponseRedirect(reverse('feed:dashboardView'))
+			return HttpResponseRedirect(reverse('feed:myPageView'))
 		else:
 			return render(request, 'accounts/login.html', context={ 
 				'toast': {
-					'message': '로그인에 실패했습니다',
-					'type': 'general'
+					'message': 'Login Failed',
+					'type': 'error'
 				},
 			})
 
@@ -33,15 +33,10 @@ def loginView(request):
 				person = Person.objects.get(user=request.user)
 				if person.name == '' or person.team == None:
 					return HttpResponseRedirect(reverse('accounts:updatePersonProfileView'))
-				return HttpResponseRedirect(reverse('feed:dashboardView'))
+				return HttpResponseRedirect(reverse('feed:myPageView'))
 			else: 
 				logout(request)
-		return render(request, 'accounts/login.html', context={ 
-			'toast': {
-				'message': 'hi',
-				'type': 'general'
-			},
-		})
+		return render(request, 'accounts/login.html', context={})
 
 def logoutView(request):
 	logout(request)
