@@ -1,0 +1,16 @@
+{% load static %}
+<header class="feed-header clearfix">
+	<div class="container clearfix">
+		<a class="logo" href="{% url 'feed:dashboardView' %}">
+			<img src="{% static 'image/assets/logo_large.png' %}" />
+		</a>
+		<div class="account floatR clearfix">
+			<div class="profile_pic floatL"><img src="{% include 'feed/blocks/profile_pic.block.html' with person=request.user.person %}" class="profile_pic_img" /></div>
+			<div class="name floatL">{{ request.user.person.name }}&nbsp;&nbsp;&nbsp;<i class="fas fa-caret-down"></i></div>
+			<ul class="dropdown">
+				<a><li class="btn-profile">내 프로필</li></a>
+				<a href="{% url 'accounts:logoutView' %}"><li class="btn-logout">로그아웃</li></a>
+			</ul>
+		</div>
+	</div>
+</header>

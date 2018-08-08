@@ -3,7 +3,9 @@
 @primary: #4265b7;
 @base_bg: lighten(@primary, 50%);
 @primary_light: lighten(@primary, 20%);
+@primary_lighter: lighten(@primary, 40%);
 @primary_dark: darken(@primary, 30%);
+@primary_bit_dark: darken(@primary, 15%);
 
 @k100: #231f20;
 
@@ -15,7 +17,7 @@ body { background-color: @primary_dark; font-family: 'Nanum Gothic', sans-serif;
 
 ol, ul { list-style: none; }
 
-a { text-decoration: none; }
+a { text-decoration: none; color: inherit;}
 
 .clearfix::after {
     content: "";
@@ -27,6 +29,8 @@ a { text-decoration: none; }
 .floatR { float: right; }
 .ta-left { text-align: left; }
 .ta-right { text-align: right; }
+
+input { outline: none; }
 
 div.base-toast { 
 	width: 100vw; height: 42px; line-height: 42px; text-align: center; position: fixed; left: 0; top: 0; 
@@ -42,6 +46,7 @@ header.feed-header {
 	a.logo { 
 		display: block; text-decoration: none; 
 		position: absolute; top: 0; left: 50%; margin-left: -50px; height: 50px;
+		img { height: 45px; margin-top: 3px;}
 	}
 	div.account {
 		cursor: pointer;
@@ -103,7 +108,9 @@ section.feed-content {
 				border-radius: 10px 0 0 10px;
 				padding-left: 60px;
 				padding-right: 40px;
+				&.selected { background-color: @primary_bit_dark; }
 				&:hover { background-color: @primary; }
+				transition: background-color .2s;
 			}
 			a.fetch-all-channel { 
 				display: inline-block;
@@ -120,5 +127,108 @@ section.feed-content {
 		overflow: scroll; 
 		box-sizing: border-box;
 		padding: 20px 40px;
+	}
+	article.issue {
+		width: calc(@container_size - 460px);
+		padding: 20px 50px;
+		ul.tabs { 
+			width: calc(@container_size - 460px);
+			padding: 0 0 0 20px;
+			box-sizing: border-box;
+			a { display: block; }
+			li.tab {
+				padding: 0 10px;
+				height: 30px; border-radius: 10px 10px 0 0;
+				background-color: @primary_lighter;
+				&:hover { background-color: @primary_light; }
+				transition: background-color .2s;
+				div.profile_pic {
+					width: 20px; height: 20px; border-radius: 10px; overflow: hidden;
+					img { height: 20px; }
+					margin: 5px;
+				}
+				div.team_name { margin-right: 5px; }
+				font-size: 12px; line-height: 30px; margin-right: 5px;
+			}
+			li.tab.priority_tab { 
+				cursor: default;
+				background-color: @base_bg;
+				&:hover { background-color: @base_bg; }
+			}
+			li.tab.priority-1 { color: #777; }
+			li.tab.priority-2 { color: green; }
+			li.tab.priority-3 { color: blue; }
+			li.tab.priority-4 { color: orange; }
+			li.tab.priority-5 { color: red; }
+		}
+		
+		div.content {
+			border-radius: 5px;
+			border: 2px solid @primary;
+			margin-bottom: 0;
+			h2 { background-color: @primary; color: white; padding: 10px 20px; font-size: 16px; line-height: 25px;}
+			p.content { 
+				font-size: 14px; line-height: 20px;
+				padding: 10px 20px;
+			}
+			div.task_label { margin-top: 10px; margin-left: 20px; line-height: 20px; font-size: 12px; }
+			ul.tasks {
+				li.task {
+					margin-top: 5px; margin-top: 10px;
+					a { display: block; }
+					div.assigned_to { 
+						border-radius: 0 5px 5px 0; overflow: hidden;
+						div.profile_pic { 
+							width: 20px; height: 20px; border-radius: 10px; overflow: hidden; 
+							img { height: 20px; }
+							margin: 5px;
+						}
+						font-size: 12px; line-height: 30px;
+						div.team_name { margin-right: 5px; }
+						background-color: @primary_lighter;
+						padding: 5px 15px;
+						transition: background-color .2s;
+						&:hover { background-color: @primary_light; }
+					}
+					div.job { font-size: 12px; line-height: 30px; padding: 5px 15px; }
+				}
+				form.add_task_form {
+
+				}
+			}
+			box-shadow: 0 5px 14px -10px @primary;
+		}
+		ul.comments {
+			margin: -1px 20px 0;
+			border: 1px solid @primary_light;
+			border-radius: 0 0 5px 5px;
+			overflow: hidden;
+			li.comment {
+				a { display: block; }
+				border-bottom: 1px dotted @primary_light;
+				div.author { 
+					div.profile_pic { 
+						width: 15px; height: 15px; border-radius: 8px; overflow: hidden; 
+						img { height: 15px; }
+						margin: 5px;
+					}
+					font-size: 12px; line-height: 25px;
+					div.team_name { margin-right: 5px; }
+					background-color: @primary_lighter;
+					padding: 5px 8px 5px 7px;
+					transition: background-color .2s;
+					&:hover { background-color: @primary_light; }
+				}
+				div.comment { font-size: 12px; line-height: 25px; padding: 5px 15px; word-wrap:break-word; max-width: calc(@container_size - 688px); }
+				position: relative;
+				div.created_at { position: absolute; top: 5px; right: 5px; opacity: 0; color: #ccc; transition: opacity .2s, background-color .2s; font-size: 10px; line-height: 25px; background-color: rgba(255, 255, 255, 0); padding-left: 10px; border-radius: 15px;}
+				&:hover { 
+					div.created_at { opacity: 1; background-color: rgba(255, 255, 255, 1); }
+				}
+			}
+			form.add_comment_form {
+				input[type=text] { width: 100%; line-height: 30px; margin: 0; padding: 0 10px; box-sizing: border-box; border: none; }
+			}
+		}
 	}
 }

@@ -1,0 +1,2 @@
+{% load static %}
+{% if person.profile_image_url %}{{ person.profile_image_url }}{% else %}{% static 'image/assets/profile_img_placeholder.png' %}{% endif %}

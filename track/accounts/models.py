@@ -1,9 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+from feed.models import Channel
+
 class Team(models.Model):
 	name = models.CharField(max_length=100)
-
+	team_channel = models.ForeignKey(Channel, on_delete=models.SET_NULL, null=True)
+	
 	def __str__(self):
 		return self.name
 

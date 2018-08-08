@@ -6,7 +6,7 @@ from .models import Team, Person
 
 
 class TeamAdmin(admin.ModelAdmin):
-    fields = ['name']
+    fields = ['name', 'team_channel']
 
 admin.site.register(Team, TeamAdmin)
 
