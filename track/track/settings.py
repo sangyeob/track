@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'static_precompiler',
 
     'accounts.apps.AccountsConfig',
+    'feed.apps.FeedConfig'
 ]
 
 MIDDLEWARE = [
@@ -135,3 +136,4 @@ STATIC_PRECOMPILER_COMPILERS = (
 )
 
 LOGIN_URL = '/accounts/login'
+LOGOUT_REDIRECT_URL = LOGIN_URL

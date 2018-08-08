@@ -6,7 +6,11 @@
 	<script src="/static/js/scripts.js"></script>
 	{% load compile_static %}
 	{% load static %}
+	<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'css/style.less'|compile %}" />
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+	{% block head %}
+	{% endblock %}
 </head>
 <body>
 	{% if toast %}

@@ -1,11 +1,124 @@
 @import "/static/css/html5reset.css";
 
-@base_bg: #ddd;
-@base_color: #4265b7;
+@primary: #4265b7;
+@base_bg: lighten(@primary, 50%);
+@primary_light: lighten(@primary, 20%);
+@primary_dark: darken(@primary, 30%);
+
+@k100: #231f20;
 
 @toast_general: #888888;
 
-body { background-color: @base_bg; }
+@container_size: 1200px;
 
-div.base-toast { width: 100vw; height: 42px; line-height: 42px; text-align: center; position: fixed; left: 0; top: 0; }
-div.base-toast.toast-type-general { background-color: @toast_general; color: black; }
+body { background-color: @primary_dark; font-family: 'Nanum Gothic', sans-serif; color: @k100;}
+
+ol, ul { list-style: none; }
+
+a { text-decoration: none; }
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.floatL { float: left; }
+.floatR { float: right; }
+.ta-left { text-align: left; }
+.ta-right { text-align: right; }
+
+div.base-toast { 
+	width: 100vw; height: 42px; line-height: 42px; text-align: center; position: fixed; left: 0; top: 0; 
+	&.toast-type-general { background-color: @toast_general; color: black; }
+}
+
+.container { width: @container_size; left: 50%; position: relative; margin-left: -@container_size / 2; }
+
+
+header.feed-header { 
+	width: 100vw; height: 50px; text-align: center; box-shadow: 0 -2px 10px @primary;
+	background-color: @primary; color: white;
+	a.logo { 
+		display: block; text-decoration: none; 
+		position: absolute; top: 0; left: 50%; margin-left: -50px; height: 50px;
+	}
+	div.account {
+		cursor: pointer;
+		line-height: 30px; font-size: 14px;
+		padding: 10px;
+		background-color: lighten(@primary, 10%);
+		position: relative;
+		ul.dropdown { 
+			display: none; position: absolute; top: 50px; right: 0; 
+			background-color: @base_bg; 
+			border-radius: 0 0 10px 10px; 
+			border: 1px solid @primary; z-index: 10; 
+			border-top: 0 none;
+			color: @k100;
+			overflow: hidden;
+			min-width: 140px;
+			padding-top: 5px;
+			box-shadow: 0 0 5px @primary_light;
+			a { display: block; color: inherit; }
+			li { 
+				line-height: 18px; padding: 5px 20px; height: 20px;
+				font-size: 13px;
+				&:hover { background-color: @primary; color: white; }
+			}
+		}
+		&:hover { 
+			background-color: @primary_dark;
+			i { transform: rotate(180deg); }
+			ul.dropdown { display: block; }
+		}
+		i { transition: transform .2s; }
+		div.profile_pic {
+			width: 30px; height: 30px; border-radius: 15px; overflow: hidden; margin-right: 10px;
+			img { height: 30px; }
+		}
+		
+
+	}
+}
+
+section.feed-content {
+	section.feed-sidebar {
+		background-color: @primary_dark;
+		color: white;
+		height: calc(100vh - 50px);
+		width: 280px;
+		box-sizing: border-box;
+		ul {
+			a { display: block; color: inherit; }
+			div.seperator { margin-top: 20px; color: @primary_light; font-size: 13px; font-weight: bold; padding-left: 60px; margin-bottom: 10px; }
+			li { 
+				margin-bottom: 10px; 
+				padding: 10px;
+				font-size: 14px;
+				cursor: pointer;
+				i { font-size: 20px; line-height: 30px; }
+				span { font-weight: bold; }
+				height: 30px; line-height: 30px;
+				border-radius: 10px 0 0 10px;
+				padding-left: 60px;
+				padding-right: 40px;
+				&:hover { background-color: @primary; }
+			}
+			a.fetch-all-channel { 
+				display: inline-block;
+				i { margin-right: 10px; }
+				font-size: 12px; line-height: 20px; text-align: right; font-weight: bold; text-decoration: underline; cursor: pointer; padding-right: 40px; 
+			}
+		}
+		overflow: scroll; padding-bottom: 20px;
+	}
+	section.main-area {
+		height: calc(100vh - 50px);
+		width: calc(@container_size - 280px);
+		background-color: @base_bg;
+		overflow: scroll; 
+		box-sizing: border-box;
+		padding: 20px 40px;
+	}
+}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<div class='feed-main-frame'>
+	<header class="feed-header clearfix">
+		<div class="container clearfix">
+			<a class="logo" href="{% url 'feed:dashboardView' %}">
+				<img src="http://placehold.it/100x50" />
+			</a>
+			<div class="account floatR clearfix">
+				<div class="profile_pic floatL"><img src="{% if request.user.person.profile_image_url %}{{ request.user.person.profile_image_url }}{% else %}{% static 'image/assets/profile_img_placeholder.png' %}{% endif %}" class="profile_pic_img" /></div>
+				<div class="name floatL">{{ request.user.person.name }}&nbsp;&nbsp;&nbsp;<i class="fas fa-caret-down"></i></div>
+				<ul class="dropdown">
+					<a><li class="btn-profile">내 프로필</li></a>
+					<a href="{% url 'accounts:logoutView' %}"><li class="btn-logout">로그아웃</li></a>
+				</ul>
+			</div>
+		</div>
+	</header>
+	<section class="feed-content container clearfix">
+		<section class="feed-sidebar floatL">
+			<ul>
+				<div class="seperator">Dashboard</div>
+				<a><li class="selected clearfix"><i class="fas fa-chart-line floatL"></i><span class="name floatR">대시보드</span></li></a>
+				<div class="seperator">Team</div>
+				<a><li class="selected clearfix"><i class="fas fa-clipboard-list"></i><span class="name floatR">팀 보드</span></li></a>
+				<div class="seperator">Channel</div>
+				<a><li class="selected clearfix"><i class="fas fa-hashtag"></i><span class="name floatR">팀 보드</span></li></a>
+				<a><li class="selected clearfix"><i class="fas fa-hashtag"></i><span class="name floatR">팀 보드</span></li></a>
+				<div class="ta-right"><a class="fetch-all-channel"><i class="fas fa-plus"></i>모두 보기</a></div>
+			</ul>
+		</section>
+		<section class="main-area floatL">
+			
+		</section>
+	</section>
+</div>
+{% endblock %}

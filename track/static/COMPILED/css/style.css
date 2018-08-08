@@ -1,6 +1,32 @@
 @import "/static/css/html5reset.css";
 body {
-  background-color: #ddd;
+  background-color: #192747;
+  font-family: 'Nanum Gothic', sans-serif;
+  color: #231f20;
+}
+ol,
+ul {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+}
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.floatL {
+  float: left;
+}
+.floatR {
+  float: right;
+}
+.ta-left {
+  text-align: left;
+}
+.ta-right {
+  text-align: right;
 }
 div.base-toast {
   width: 100vw;
@@ -14,4 +40,150 @@ div.base-toast {
 div.base-toast.toast-type-general {
   background-color: #888888;
   color: black;
+}
+.container {
+  width: 1200px;
+  left: 50%;
+  position: relative;
+  margin-left: -600px;
+}
+header.feed-header {
+  width: 100vw;
+  height: 50px;
+  text-align: center;
+  box-shadow: 0 -2px 10px #4265b7;
+  background-color: #4265b7;
+  color: white;
+}
+header.feed-header a.logo {
+  display: block;
+  text-decoration: none;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -50px;
+  height: 50px;
+}
+header.feed-header div.account {
+  cursor: pointer;
+  line-height: 30px;
+  font-size: 14px;
+  padding: 10px;
+  background-color: #6582c7;
+  position: relative;
+}
+header.feed-header div.account ul.dropdown {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0;
+  background-color: #fbfbfd;
+  border-radius: 0 0 10px 10px;
+  border: 1px solid #4265b7;
+  z-index: 10;
+  border-top: 0 none;
+  color: #231f20;
+  overflow: hidden;
+  min-width: 140px;
+  padding-top: 5px;
+  box-shadow: 0 0 5px #8aa0d5;
+}
+header.feed-header div.account ul.dropdown a {
+  display: block;
+  color: inherit;
+}
+header.feed-header div.account ul.dropdown li {
+  line-height: 18px;
+  padding: 5px 20px;
+  height: 20px;
+  font-size: 13px;
+}
+header.feed-header div.account ul.dropdown li:hover {
+  background-color: #4265b7;
+  color: white;
+}
+header.feed-header div.account:hover {
+  background-color: #192747;
+}
+header.feed-header div.account:hover i {
+  transform: rotate(180deg);
+}
+header.feed-header div.account:hover ul.dropdown {
+  display: block;
+}
+header.feed-header div.account i {
+  transition: transform 0.2s;
+}
+header.feed-header div.account div.profile_pic {
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  overflow: hidden;
+  margin-right: 10px;
+}
+header.feed-header div.account div.profile_pic img {
+  height: 30px;
+}
+section.feed-content section.feed-sidebar {
+  background-color: #192747;
+  color: white;
+  height: calc(100vh - 50px);
+  width: 280px;
+  box-sizing: border-box;
+  overflow: scroll;
+  padding-bottom: 20px;
+}
+section.feed-content section.feed-sidebar ul a {
+  display: block;
+  color: inherit;
+}
+section.feed-content section.feed-sidebar ul div.seperator {
+  margin-top: 20px;
+  color: #8aa0d5;
+  font-size: 13px;
+  font-weight: bold;
+  padding-left: 60px;
+  margin-bottom: 10px;
+}
+section.feed-content section.feed-sidebar ul li {
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 10px 0 0 10px;
+  padding-left: 60px;
+  padding-right: 40px;
+}
+section.feed-content section.feed-sidebar ul li i {
+  font-size: 20px;
+  line-height: 30px;
+}
+section.feed-content section.feed-sidebar ul li span {
+  font-weight: bold;
+}
+section.feed-content section.feed-sidebar ul li:hover {
+  background-color: #4265b7;
+}
+section.feed-content section.feed-sidebar ul a.fetch-all-channel {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 20px;
+  text-align: right;
+  font-weight: bold;
+  text-decoration: underline;
+  cursor: pointer;
+  padding-right: 40px;
+}
+section.feed-content section.feed-sidebar ul a.fetch-all-channel i {
+  margin-right: 10px;
+}
+section.feed-content section.main-area {
+  height: calc(100vh - 50px);
+  width: calc(1200px - 280px);
+  background-color: #fbfbfd;
+  overflow: scroll;
+  box-sizing: border-box;
+  padding: 20px 40px;
 }
