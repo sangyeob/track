@@ -16,8 +16,6 @@ def loginView(request):
 				person = Person(user=user)
 				person.save()
 				
-			if person.name == '' or person.team == None:
-				return HttpResponseRedirect(reverse('accounts:updatePersonProfileView'))
 			return HttpResponseRedirect(reverse('feed:myPageView'))
 		else:
 			return render(request, 'accounts/login.html', context={ 
@@ -30,9 +28,6 @@ def loginView(request):
 	if request.method == 'GET':
 		if request.user:
 			if request.user.is_authenticated:
-				person = Person.objects.get(user=request.user)
-				if person.name == '' or person.team == None:
-					return HttpResponseRedirect(reverse('accounts:updatePersonProfileView'))
 				return HttpResponseRedirect(reverse('feed:myPageView'))
 			else: 
 				logout(request)
@@ -41,6 +36,3 @@ def loginView(request):
 def logoutView(request):
 	logout(request)
 	return HttpResponseRedirect(reverse('accounts:loginView'))
-
-def updatePersonProfileView(request):
-	return render(request, 'accounts/updatePersonProfile.html')
